@@ -21,6 +21,8 @@ import "./manageReview.styles.css";
 export default function AdditionalPage() {
   const [selected, setSelected] = useState(0);
   const [popoverActive, setPopoverActive] = useState(false);
+
+  // 表格顶部几个切换按钮
   const handleTabChange = useCallback(
     (selectedTabIndex: number) => setSelected(selectedTabIndex),
     []
@@ -45,6 +47,7 @@ export default function AdditionalPage() {
       accessibilityLabel: "Hidden",
     },
   ];
+
   // 评论数据
   const reviewData = [
     {
@@ -59,11 +62,6 @@ export default function AdditionalPage() {
       lossingOrder: 13,
     },
   ];
-
-  const resourceName = {
-    singular: "review",
-    plural: "reviewData",
-  };
 
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(reviewData);
@@ -156,6 +154,7 @@ export default function AdditionalPage() {
     );
   }
 
+  // 商品筛选
   const myContent: React.ReactNode = (
     <div style={{ display: "flex", height: "30px" }}>
       <ProductTabList></ProductTabList>
@@ -321,6 +320,7 @@ export default function AdditionalPage() {
                   type="text"
                   onChange={(e: any) => {
                     console.log(e);
+                    // 此处写输入框筛选事件
                   }}
                   prefix=""
                   placeholder="Filter"
@@ -329,7 +329,6 @@ export default function AdditionalPage() {
               </div>
             </BlockStack>
             <IndexTable
-              resourceName={resourceName}
               itemCount={reviewData.length}
               selectedItemsCount={
                 allResourcesSelected ? "All" : selectedResources.length
